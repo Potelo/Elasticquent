@@ -241,8 +241,7 @@ trait ElasticquentTrait
      * @param   int $offset
      * @return  ResultCollection
      */
-    public static function searchByQuery($query = null, $aggregations = null, $sourceFields = null, $limit = null, $offset = null, $sort = null)
-    {
+    public static function searchByQuery($query = null, $aggregations = null, $highlight = null, $sourceFields = null, $limit = null, $offset = null, $sort = null)    {
         $instance = new static;
 
         $params = $instance->getBasicEsParams(true, true, true, $limit, $offset);
@@ -262,6 +261,11 @@ trait ElasticquentTrait
         if ($sort) {
             $params['body']['sort'] = $sort;
         }
+        
+        if ($highlight) {
+            $params['body']['highlight'] = $highlight;
+        }
+
 
         $result = $instance->getElasticSearchClient()->search($params);
 
@@ -555,6 +559,11 @@ trait ElasticquentTrait
         if (isset($hit['_version'])) {
             $instance->documentVersion = $hit['_version'];
         }
+        
+        if(isset($hit['highlight'])){
+            $instance->highlight = $hit['highlight'];
+        }
+
 
         return $instance;
     }
