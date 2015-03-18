@@ -1,5 +1,5 @@
 {
-  "name": "fairholm/elasticquent",
+  "name": "potelo/elasticquent",
   "type": "library",
   "description": "Map Larvel Eloquent models to Elasticsearch types.",
   "keywords": [
@@ -7,7 +7,7 @@
     "eloquent",
     "laravel"
   ],
-  "homepage": "https://github.com/adamfairholm/Elasticquent",
+  "homepage": "https://github.com/Potelo/Elasticquent",
   "license": "MIT",
   "authors": [
     {
