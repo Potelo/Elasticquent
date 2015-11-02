@@ -536,7 +536,11 @@ trait ElasticquentTrait
     {
         $instance = $this->newInstance(array(), true);
 
-        $attributes = $hit['_source'];
+        if (isset($hit['_source'])) {
+            $attributes = $hit['_source'];
+        }else{
+            $attributes = [];
+        }
 
         // Add fields to attributes
         if (isset($hit['fields'])) {
