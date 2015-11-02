@@ -538,7 +538,7 @@ trait ElasticquentTrait
 
         if (isset($hit['_source'])) {
             $attributes = $hit['_source'];
-        }else{
+        } else {
             $attributes = [];
         }
 
@@ -564,10 +564,13 @@ trait ElasticquentTrait
             $instance->documentVersion = $hit['_version'];
         }
         
-        if(isset($hit['highlight'])){
+        if(isset($hit['highlight'])) {
             $instance->highlight = $hit['highlight'];
         }
 
+        if(isset($hit['inner_hits'])) {
+            $instance->inner_hits = $hit['inner_hits'];
+        }
 
         return $instance;
     }
