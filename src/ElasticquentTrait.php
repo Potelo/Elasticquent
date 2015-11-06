@@ -257,11 +257,11 @@ trait ElasticquentTrait
         if ($aggregations) {
             $params['body']['aggs'] = $aggregations;
         }
-        
+
         if ($sort) {
             $params['body']['sort'] = $sort;
         }
-        
+
         if ($highlight) {
             $params['body']['highlight'] = $highlight;
         }
@@ -545,7 +545,13 @@ trait ElasticquentTrait
         // Add fields to attributes
         if (isset($hit['fields'])) {
             foreach ($hit['fields'] as $key => $value) {
-                $attributes[$key] = $value;
+                $key_explode = explode('.', $key);
+
+                if (count($key_explode) > 1){
+                    $attributes[$key] = $value;
+                } else {
+                    $attributes[$key] = $value[0];
+                }
             }
         }
 
@@ -563,7 +569,7 @@ trait ElasticquentTrait
         if (isset($hit['_version'])) {
             $instance->documentVersion = $hit['_version'];
         }
-        
+
         if(isset($hit['highlight'])) {
             $instance->highlight = $hit['highlight'];
         }
